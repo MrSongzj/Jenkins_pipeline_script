@@ -16,12 +16,13 @@ pipeline {
         echo "分支: ${env.branch}"
         echo "平台: ${env.platform}"
         echo "部署环境: ${env.deploy}"
-        withEnv([
-        'https_proxy=http://127.0.0.1:7897',
-        'http_proxy=http://127.0.0.1:7897',
-        'all_proxy=socks5://127.0.0.1:7897']) {
+        script {
           // 下载项目
-          sh "rm -rf cos-power-ios;git clone --branch ${env.branch} http://git.gydev.cn/cos-power/cos-power-ios.git"
+          sh """
+          rm -rf cos-power-ios;
+          export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897;
+          git clone --branch ${env.branch} http://git.gydev.cn/cos-power/cos-power-ios.git
+          """
 
           // 修改签名信息
           // replaceFileContent("cos-power-ios/Cosbike/Cosbike.xcodeproj/project.pbxproj", [
