@@ -31,12 +31,14 @@ pipeline {
           //   'PRODUCT_BUNDLE_IDENTIFIER = com.velobank.dev;': 'PRODUCT_BUNDLE_IDENTIFIER = com.velotest.qa;',
           //   '"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = veloDevAdHocDevelopment;': '"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = velo_adhoc_qa;'
           // ])
-          replaceFileContent("cos-power-ios/Cosbike/Cosbike.xcodeproj/project.pbxproj", [
-            '"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";': '"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";',
-            '"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7QN49CU26P;': '"DEVELOPMENT_TEAM[sdk=iphoneos*]" = ZQCCGMM2X2;',
-            'PRODUCT_BUNDLE_IDENTIFIER = cn.xfxpower.cosbike;': 'PRODUCT_BUNDLE_IDENTIFIER = com.velotest.qa;',
-            '"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = XfxChangePowerDevelopmentProvisionProfile;': '"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = velo_adhoc_qa;'
-          ])
+          dir("cos-power-ios") {
+            replaceFileContent("Cosbike/Cosbike.xcodeproj/project.pbxproj", [
+              '"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";': '"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";',
+              '"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7QN49CU26P;': '"DEVELOPMENT_TEAM[sdk=iphoneos*]" = ZQCCGMM2X2;',
+              'PRODUCT_BUNDLE_IDENTIFIER = cn.xfxpower.cosbike;': 'PRODUCT_BUNDLE_IDENTIFIER = com.velotest.qa;',
+              '"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = XfxChangePowerDevelopmentProvisionProfile;': '"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = velo_adhoc_qa;'
+            ])
+          }
         }
       }
     }
